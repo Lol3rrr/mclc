@@ -1,0 +1,36 @@
+cabal-version:      2.4
+name:               mclc
+version:            0.1.0.0
+
+-- A short (one-line) description of the package.
+-- synopsis:
+
+-- A longer description of the package.
+-- description:
+
+-- A URL where users can report bugs.
+-- bug-reports:
+
+-- The license under which the package is released.
+-- license:
+author:             Lol3rrr
+maintainer:         lol3r@lol3r.net
+
+-- A copyright notice.
+-- copyright:
+-- category:
+extra-source-files: CHANGELOG.md
+
+executable mclc
+    main-is:          Main.hs
+
+    -- Modules included in this executable, other than Main.
+    other-modules: Parser, Semantics, Tokenizer, Synthesis, AStar, EntityGraph, BuiltinGraph, NormalizedGraph, Layout
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:
+    build-depends:    base ^>=4.16.0.0, containers ^>=0.6, text ^>=1.2, split ^>= 0.2, svg-builder ^>= 0.1
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+    ghc-options: --version

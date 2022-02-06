@@ -1,0 +1,14 @@
+entity AndGate {
+  in_ports {
+    src1 : bit;
+    src2 : bit;
+  }
+
+  out_ports {
+    result : bit;
+  }
+
+  behaviour {
+    (result) <= and (src1, src2);
+  }
+}

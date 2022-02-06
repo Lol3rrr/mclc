@@ -1,0 +1,11 @@
+entity example {
+  in_ports {
+    src1 : bit;
+    src2 : bit;
+  }
+  out_ports {}
+
+  behaviour {
+    (target_port) <= and(src1, src2);
+  }
+}

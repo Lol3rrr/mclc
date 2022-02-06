@@ -1,0 +1,23 @@
+
+
+entity 1BitAdder {
+  in_ports {
+    first : bit;
+    second : bit;
+    carry_in : bit;
+  }
+
+  out_ports {
+    first : bit;
+    carry_out : bit;
+  }
+
+  behaviour {
+    (first_result) = xor (first, second);
+    (first) <= xor (first_result, carry_in);
+
+    (carry_res1) = and(first, second);
+    (carry_res2) = and(first_result, carry_in);
+    (carry_out) <= or (carry_res1, carry_res2);
+  }
+}

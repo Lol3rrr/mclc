@@ -1,0 +1,13 @@
+entity Multiplex {
+  in_ports {
+    src1 : bit;
+  }
+
+  out_ports {
+    result : bit;
+  }
+
+  behaviour {
+    (result) <= xor (src1, src1);
+  }
+}
