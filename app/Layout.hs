@@ -55,10 +55,16 @@ module Layout where
     setCell (Space (layer:layers)) f (x, y, z) = Space (layer : rest)
       where Space rest = setCell (Space layers) f (x, y, z - 1)
 
+  boundedRow :: Int -> a -> Row a
+  boundedRow size f = Row (take size (repeat f))
+
   infiniteRow :: a -> Row a
   infiniteRow f
     = Row (f : rest)
     where Row rest = infiniteRow f
+
+  boundedGrid :: (Int, Int) -> a -> Grid a
+  boundedGrid (x, y) f = Grid (take y (repeat (boundedRow x f)))
 
   infiniteGrid :: a -> Grid a
   infiniteGrid f

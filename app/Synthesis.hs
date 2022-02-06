@@ -373,7 +373,7 @@ module Synthesis where
   generateSpaceImage (Layout.Space grids)
     = doctype
       <> with (svg11_ content) [Version_ <<- "1.1", Width_ <<- Data.Text.pack (show (width * scale)), Height_ <<- Data.Text.pack (show (height * scale * depth + 50 * (depth-1)))]
-    where (width, height, depth) = Layout.spaceSize (Layout.Space grids) (\x -> x /= Empty) (1000, 1000, 1000)
+    where (width, height, depth) = Layout.spaceSize (Layout.Space grids) (\x -> x /= Empty) (10000, 10000, 10000)
           content = foldl1 (<>) (generateSpaceImageLayer 0 scale (width, height, depth) grids)
           scale = 20
 
@@ -386,7 +386,7 @@ module Synthesis where
   generateGridImage grid
     = doctype
       <> with (svg11_ content) [Version_ <<- "1.1", Width_ <<- Data.Text.pack (show (width * scale)), Height_ <<- Data.Text.pack (show (height * scale))]
-    where (width, height) = Layout.gridSize grid (\x -> x /= Empty) (1000, 1000)
+    where (width, height) = Layout.gridSize grid (\x -> x /= Empty) (10000, 10000)
           content = generateGridContent (0, 0) scale (width, height) grid
           scale = 20
 
@@ -416,7 +416,7 @@ module Synthesis where
   gridContent :: (Int, Int) -> Int -> Grid -> [Element]
   gridContent (ix, iy) scale grid
     = map fromJust (filter isJust (map map_cell_f numbered_cells))
-    where (width, height) = Layout.gridSize grid (\x -> x /= Empty) (1000, 1000)
+    where (width, height) = Layout.gridSize grid (\x -> x /= Empty) (10000, 10000)
           numbered_cells = Layout.positionGrid (width, height) grid
           map_cell_f
             = (\(cell, (x, y)) -> case cell of
@@ -474,7 +474,7 @@ module Synthesis where
   blockPlacement :: Space -> [MinecraftBlock]
   blockPlacement space
     = map (\(pos, c) -> MinecraftBlock (pos, blockFromCell c)) ordered_blocks
-    where raw_cells = Layout.positionSpace (1000, 1000, 1000) space
+    where raw_cells = Layout.positionSpace (10000, 10000, 10000) space
           filtered_cells = filter (\(cell, _) -> case cell of
             Full _ -> True
             _ -> False) raw_cells

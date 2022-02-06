@@ -32,5 +32,3 @@ executable mclc
     build-depends:    base ^>=4.16.0.0, containers ^>=0.6, text ^>=1.2, split ^>= 0.2, svg-builder ^>= 0.1
     hs-source-dirs:   app
     default-language: Haskell2010
-
-    ghc-options: --version

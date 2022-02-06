@@ -4,8 +4,6 @@ module AStar (startAStar, AsGridCell (..), GridCell (..)) where
   import Data.Map (Map)
   import qualified Data.Map as Map
 
-  import Debug.Trace
-
   import qualified Layout
 
   data GridCell = Free | Used deriving (Show, Eq);
