@@ -19,7 +19,7 @@ maintainer:         lol3r@lol3r.net
 -- A copyright notice.
 -- copyright:
 -- category:
-extra-source-files: CHANGELOG.md
+--extra-source-files: CHANGELOG.md
 
 executable mclc
     main-is:          Main.hs

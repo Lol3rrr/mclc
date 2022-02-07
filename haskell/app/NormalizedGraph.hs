@@ -129,3 +129,43 @@ module NormalizedGraph where
                           (InputToNode src _ _) -> src
                           (NodeToNode src _ _ _) -> src
                           (NodeToOutput src _ _) -> src) target_edges
+
+  toString :: Graph -> String
+  toString (Graph (nodes, edges)) = foldl1 (++) strs
+    where str_nodes = map nodeToString nodes
+          str_edges = map edgeToString edges
+          strs = str_nodes ++ str_edges
+          
+
+  nodeToString :: GraphNode -> String
+  nodeToString (GraphNode (id, value))
+    = "Node (" ++ id_str ++ "," ++ value_str ++ ");"
+    where id_str = idToString id
+          value_str = case value of
+            (InputNode name) -> "Input " ++ name
+            (OperationNode op) -> "Operation " ++ op
+            (VariableNode var) -> "Variable " ++ var
+            (SplitterNode count) -> "Splitter " ++ (show count)
+            (OutputNode name) -> "Output " ++ name
+            other -> error (show other)
+
+  edgeToString :: GraphEdge -> String
+  edgeToString (InputToNode src_id dest_id dest_port)
+    = "InputToNode (" ++ src_id_str ++ "," ++ dest_id_str ++ "," ++ (show dest_port) ++ ");"
+    where src_id_str = idToString src_id
+          dest_id_str = idToString dest_id
+  edgeToString (NodeToNode src_id src_port dest_id dest_port)
+    = "NodeToNode (" ++ src_id_str ++ "," ++ (show src_port) ++ "," ++ dest_id_str ++ "," ++ (show dest_port) ++ ");"
+    where src_id_str = idToString src_id
+          dest_id_str = idToString dest_id
+  edgeToString (NodeToOutput src_id src_port dest_id)
+    = "NodeToOutput (" ++ src_id_str ++ "," ++ (show src_port) ++ "," ++ dest_id_str ++ ");"
+    where src_id_str = idToString src_id
+          dest_id_str = idToString dest_id
+
+  idToString :: GraphNodeID -> String
+  idToString (InputID name) = "Input " ++ name
+  idToString (EntityID id) = "Entity " ++ (show id)
+  idToString (VariableID var_name var_id) = "Variable " ++ var_name ++ " " ++ (show var_id)
+  idToString (SplitterID id) = "Splitter " ++ (show id)
+  idToString (OutputID name) = "Output " ++ name

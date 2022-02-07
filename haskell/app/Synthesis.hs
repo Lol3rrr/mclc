@@ -74,7 +74,8 @@ module Synthesis where
       let entity_graph = EntityGraph.build e;
       let builtin_graph = BuiltinGraph.fromEntityGraph others entity_graph;
       let normalized_graph = NormalizedGraph.fromBuiltin builtin_graph;
-      return (generatePlacement normalized_graph);
+      
+      return (trace (NormalizedGraph.toString normalized_graph) (generatePlacement normalized_graph));
 
   rmdups :: Eq a => [a] -> [a]
   rmdups [] = []
@@ -85,7 +86,7 @@ module Synthesis where
   manhattenDistance (x1, y1) (x2, y2) = (abs (x1 - x2)) + (abs (y1 - y2))
 
   manhattenDistance3D :: SpacePosition -> SpacePosition -> Int
-  manhattenDistance3D (x1, y1, z1) (x2, y2, z2) = (abs (x1 - x2)) + (abs (y1 - y2)) + (abs (z1 - z2))
+  manhattenDistance3D (x1, y1, z1) (x2, y2, z2) = ((x2 - x1)) + ((y2 - y1)) + ((z2 - z1))
 
   aStarNeighbours3D :: Space -> (SpacePosition, Maybe SpacePosition) -> [(SpacePosition, Int)]
   aStarNeighbours3D space (pos, _)
